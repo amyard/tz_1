@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "ef04aa4e-4c9d-46a6-b9c8-106ecfa384cd",
+		"name": "TZ_v1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "2. Error API Handler",
+			"item": [
+				{
+					"name": "404 Error Result",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "41520fde-aded-4639-a8f2-55ed95bad252",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "03c62104-2464-4405-841f-44b1c4ef9cc7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "fe865dd2-7d9a-4b1b-b773-3ba86ec44864",
+			"key": "url",
+			"value": "https://localhost:5001"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
