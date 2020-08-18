@@ -6,22 +6,11 @@ namespace Backend.Models
 {
     public class TransactionMD
     {
-        [Required]
         public int Id { get; set; }
-
-        [Required]
         public int TransactionId { get; set; }
-
-        [Required]
-        public Status Status { get; set; }
-
-        [Required]
-        public Type Type { get; set; }
-
-        [Required]
+        public TransactionStatus Status { get; set; }
+        public TransactionType Type { get; set; }
         public string ClientName { get; set; }
-
-        [Required]
         public string Price { get; set; }
     }
 }

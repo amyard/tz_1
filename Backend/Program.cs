@@ -57,16 +57,7 @@ namespace Backend
 
                 foreach(var item in data)
                 {
-                    TransactionMD obj = new TransactionMD()
-                    {
-                        TransactionId = item.TransactionId,
-                        Status = item.Status,
-                        Type = item.Type,
-                        ClientName = item.ClientName,
-                        Price = item.Price
-                    };
-
-                    await context.TransactionMDs.AddAsync(obj);
+                    await context.AddAsync(item);
                 }
             }
         }

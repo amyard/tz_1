@@ -1,6 +1,6 @@
 ﻿namespace Backend.Enums
 {
-    public enum Type
+    public enum TransactionType
     {
         Refill = 0,
         Withdrawal = 1
