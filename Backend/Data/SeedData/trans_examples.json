@@ -1,0 +1,16 @@
+[
+	{
+		"TransactionId": 1,
+		"Status": 0,
+		"Type": 1,
+		"ClientName": "Dale Cotton",
+		"Price": "$28.43"
+	},
+	{
+		"TransactionId": 2,
+		"Status": 1,
+		"Type": 0,
+		"ClientName": "Paul Carter",
+		"Price": "$28.43"
+	}
+]

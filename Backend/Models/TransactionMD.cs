@@ -22,7 +22,6 @@ namespace Backend.Models
         public string ClientName { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18, 2)")]
-        public decimal Price { get; set; }
+        public string Price { get; set; }
     }
 }
