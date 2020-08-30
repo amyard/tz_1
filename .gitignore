@@ -432,3 +432,10 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+## custom
+*.db
+transDb.db
+Backend/transDB.db
+.vscode/launch.json
+.vscode/tasks.json

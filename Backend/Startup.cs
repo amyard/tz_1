@@ -1,5 +1,7 @@
+using AutoMapper;
 using Backend.Data;
 using Backend.Extensions;
+using Backend.Helpers;
 using Backend.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +13,7 @@ namespace Backend
 {
     public class Startup
     {
-        public IConfiguration _config { get; }
+        private readonly IConfiguration _config;
 
         public Startup(IConfiguration config)
         {
@@ -22,7 +24,11 @@ namespace Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(MappingProfiles));
+            
             services.AddControllers();
+
+            services.AddApplicationServices();
 
             services.AddDbContext<StoreContext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
 
