@@ -14,7 +14,481 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "{{url}}/lol",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"lol"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "4. Transaction",
+			"item": [
+				{
+					"name": "Get List Of Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction by Id - Not Found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction/555555",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction",
+								"555555"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Correct Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?status=Pending",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Incorrect Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?status=Awesome",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Awesome"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Correct Lower Case Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?status=pending",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Correct Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?type=Refill",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Refill"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Incorrect Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?type=Refil",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Refil"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Correct Lower Case Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?type=refill",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "refill"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Correct Status and Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?status=Cancelled&type=Withdrawal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Cancelled"
+								},
+								{
+									"key": "type",
+									"value": "Withdrawal"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Correct Status and Incorrect Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?status=Cancelled&type=Awesome",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Cancelled"
+								},
+								{
+									"key": "type",
+									"value": "Awesome"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Incorrect Status and Incorrect Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?status=Ave&type=Awesome",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Ave"
+								},
+								{
+									"key": "type",
+									"value": "Awesome"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Pagination First page by default",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Pagination Page 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?page=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Pagination Last Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?page=5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Pagination Wrong Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?page=11",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Pagination and Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?status=Pending&page=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Pending"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Incorrect Pagination and Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?status=Pending&page=5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Pending"
+								},
+								{
+									"key": "page",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Of Transactions - Pagination and Status and Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction?status=Cancelled&type=Withdrawal&page=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Cancelled"
+								},
+								{
+									"key": "type",
+									"value": "Withdrawal"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
 						}
 					},
 					"response": []
@@ -47,7 +521,7 @@
 	],
 	"variable": [
 		{
-			"id": "fe865dd2-7d9a-4b1b-b773-3ba86ec44864",
+			"id": "a41c9331-e4b8-42d8-b230-c1268e374583",
 			"key": "url",
 			"value": "https://localhost:5001"
 		}
