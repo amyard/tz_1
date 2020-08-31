@@ -2,8 +2,10 @@
 using Backend.Data;
 using Backend.Dtos;
 using Backend.Errors;
+using Backend.Helpers;
 using Backend.Interfaces;
 using Backend.Models;
+using Backend.RequestModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -22,12 +24,10 @@ namespace Backend.Controllers
             _transactionService = transactionService;
         }
 
-
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<TransactionMDDto>>> GetAllTransactions()
+        public async Task<ActionResult<Pagination<TransactionMDDto>>> GetAllTransactions([FromQuery] TransactionFilterModel transFilter)
         {
-            var trans = await _transactionService.GetTransactionsAsync();
-            return Ok(_mapper.Map<IReadOnlyList<TransactionMD>, IReadOnlyList<TransactionMDDto>>(trans));
+            return Ok(await _transactionService.GetTransactionsWithFiltersAsync(transFilter));
         }
 
         [HttpGet("{transactionId}")]

@@ -11,6 +11,9 @@ namespace Backend.Enums
         Completed,
 
         [EnumMember(Value = "Cancelled")]
-        Cancelled
+        Cancelled,
+
+        [EnumMember(Value = "Default")]
+        Default
     }
 }
