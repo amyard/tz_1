@@ -28,11 +28,6 @@ namespace Backend.Services
 
         }
 
-        public Task<bool> DeleteTransactionAsync(int transactionId)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task<TransactionMD> GetTransactionByIdAsync(int transactionId)
         {
             return await _context.TransactionMDs.FirstOrDefaultAsync(x=>x.TransactionId == transactionId);
@@ -84,10 +79,21 @@ namespace Backend.Services
             return new Pagination<TransactionMDDto>(filters.Page, pagesLast, pageSize, totalItems, result.Count(), previousPage, nextPage, data);
         }
 
-
-        public Task<TransactionMD> UpdateTransactionAsync(TransactionMD entity)
+        public async Task DeleteTransactionAsync(TransactionMD transactionMD)
         {
-            throw new System.NotImplementedException();
+            _context.Remove(transactionMD);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateTransactionAsync(TransactionMD entity, TransactionMDDto transDto)
+        {
+            entity.TransactionId = transDto.TransactionId;
+            entity.Status = GetEnumStatusName(transDto.Status);
+            entity.Type = GetEnumTypeName(transDto.Type);
+            entity.ClientName = transDto.ClientName;
+            entity.Price = transDto.Price;
+
+            await _context.SaveChangesAsync();
         }
 
 

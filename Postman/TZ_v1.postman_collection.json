@@ -55,14 +55,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/transaction/1",
+							"raw": "{{url}}/api/transaction/1112",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"transaction",
-								"1"
+								"1112"
 							]
 						}
 					},
@@ -492,6 +492,81 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Transaction by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/transaction/1111",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"transaction",
+								"1111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Transaction by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Id",
+									"value": "1112",
+									"type": "text"
+								},
+								{
+									"key": "TransactionId",
+									"value": "1112",
+									"type": "text"
+								},
+								{
+									"key": "Status",
+									"value": "Pending",
+									"type": "text"
+								},
+								{
+									"key": "Type",
+									"value": "Refill",
+									"type": "text"
+								},
+								{
+									"key": "ClientName",
+									"value": "Updated User",
+									"type": "text"
+								},
+								{
+									"key": "Price",
+									"value": "$28.43",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://localhost:44333/api/transaction/1112",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44333",
+							"path": [
+								"api",
+								"transaction",
+								"1112"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -521,7 +596,7 @@
 	],
 	"variable": [
 		{
-			"id": "a41c9331-e4b8-42d8-b230-c1268e374583",
+			"id": "a6233386-4a69-4cd2-bfc3-1d781be65e75",
 			"key": "url",
 			"value": "https://localhost:5001"
 		}

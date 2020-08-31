@@ -39,5 +39,30 @@ namespace Backend.Controllers
         
             return _mapper.Map<TransactionMD, TransactionMDDto>(trans);
         }
+
+        [HttpDelete("{transactionId}")]
+        public async Task<ActionResult> DeleteTransactionAsync(int transactionId)
+        {
+            TransactionMD trans = await _transactionService.GetTransactionByIdAsync(transactionId);
+
+            if(trans == null) return NotFound(new ApiResponse(404));
+
+            await _transactionService.DeleteTransactionAsync(trans);
+
+            return Ok(new ApiResponse(200, "Resource deleted successfully"));
+        }
+
+        [HttpPut("{transactionId}")]
+        public async Task<ActionResult> UpdateTransactionAsync([FromForm] TransactionMDDto transDto)
+        {
+            int transId = int.Parse(HttpContext.Request.RouteValues["transactionId"].ToString());
+            TransactionMD trans = await _transactionService.GetTransactionByIdAsync(transId);
+
+            if (trans == null) return NotFound(new ApiResponse(404));
+
+            await _transactionService.UpdateTransactionAsync(trans, transDto);
+
+            return Ok(new ApiResponse(200, "Resource updated successfully"));
+        }
     }
 }

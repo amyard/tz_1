@@ -12,7 +12,7 @@ namespace Backend.Interfaces
         Task<TransactionMD> GetTransactionByIdAsync(int transactionId);
         Task<IReadOnlyList<TransactionMD>> GetTransactionsAsync();
         Task<Pagination<TransactionMDDto>> GetTransactionsWithFiltersAsync(TransactionFilterModel filters);
-        Task<TransactionMD> UpdateTransactionAsync(TransactionMD entity);
-        Task<bool> DeleteTransactionAsync(int transactionId);
+        Task UpdateTransactionAsync(TransactionMD entity, TransactionMDDto transDto);
+        Task DeleteTransactionAsync(TransactionMD transactionMD);
     }
 }
