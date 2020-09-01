@@ -17,3 +17,4 @@ VARIALBE |   INITIAL VALUE        |    CURRENT VALUE       |
 -----------------------------------------------------------|
 url      | https://localhost:5001 | https://localhost:5001 |
 ```
+5. {{delme_token}} and {{amyard_token}} - is global varible. it contains tokens for user delme and amyard. to refresh tokens - call url in "3. Identity" : "Login as delme - custom created user by startup" to populate {{delme_token}} and "Login as as new user - amyard" - {{amyard_token}}

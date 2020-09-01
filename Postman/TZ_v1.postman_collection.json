@@ -29,6 +29,201 @@
 			"protocolProfileBehavior": {}
 		},
 		{
+			"name": "3. Identity",
+			"item": [
+				{
+					"name": "Login as delme - custom created user by startup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "db92a690-70e3-492b-aa66-78ab3b19e4c1",
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('displayName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('delme_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"delme@gmail.com\",\r\n    \"password\":\"Admin123*\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as delme - Wrong password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"delme@gmail.com\",\r\n    \"password\":\"password\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as unexisted user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"alloha@gmail.com\",\r\n    \"password\":\"Admin123*\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register new user - amyard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\":\"amyard\",\r\n    \"email\":\"amyard@gmail.com\",\r\n    \"password\":\"Admin123*\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/account/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as as new user - amyard",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "87d62935-592e-455e-a465-1852fb2cac7b",
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('displayName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('amyard_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"amyard@gmail.com\",\r\n    \"password\":\"Admin123*\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
 			"name": "4. Transaction",
 			"item": [
 				{
@@ -596,7 +791,7 @@
 	],
 	"variable": [
 		{
-			"id": "a6233386-4a69-4cd2-bfc3-1d781be65e75",
+			"id": "364fab69-ff9a-45e8-b691-a5832b71dbdb",
 			"key": "url",
 			"value": "https://localhost:5001"
 		}

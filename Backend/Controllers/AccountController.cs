@@ -1,5 +1,6 @@
 ﻿using Backend.Dtos;
 using Backend.Errors;
+using Backend.Interfaces;
 using Backend.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,13 @@ namespace Backend.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ITokenService _tokenService;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService  tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
         [HttpPost("login")]
@@ -32,7 +35,7 @@ namespace Backend.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = "here will be token",
+                Token = _tokenService.CreateToken(user),
                 DisplayName = user.DisplayName
             };
         }
@@ -55,7 +58,7 @@ namespace Backend.Controllers
             return new UserDto
             {
                 DisplayName = user.DisplayName,
-                Token = "here will be token",
+                Token = _tokenService.CreateToken(user),
                 Email = user.Email
             };
         }

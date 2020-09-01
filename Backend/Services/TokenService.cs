@@ -1,20 +1,19 @@
-﻿using AutoMapper.Configuration;
-using Backend.Interfaces;
-using Backend.Models;
-using Microsoft.IdentityModel.Tokens;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-
+using Backend.Interfaces;
+using Backend.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Backend.Services
 {
     public class TokenService : ITokenService
     {
         private readonly IConfiguration _config;
-        private readonly SymmetricSecurityKey _key; // use for encrypt / decrypt our sygnature in token
+        private readonly SymmetricSecurityKey _key;
 
         public TokenService(IConfiguration config)
         {
@@ -30,7 +29,7 @@ namespace Backend.Services
                 new Claim(JwtRegisteredClaimNames.GivenName, user.DisplayName)
             };
 
-            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

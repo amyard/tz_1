@@ -11,6 +11,7 @@ namespace Backend.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ITransactionService, TransactionService>();
 
             // for custom error handling
