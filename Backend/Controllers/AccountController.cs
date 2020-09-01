@@ -1,9 +1,13 @@
 ﻿using Backend.Dtos;
 using Backend.Errors;
+using Backend.Extensions;
 using Backend.Interfaces;
 using Backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Backend.Controllers
@@ -61,6 +65,26 @@ namespace Backend.Controllers
                 Token = _tokenService.CreateToken(user),
                 Email = user.Email
             };
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<UserDto>> GetCurrectUser()
+        {
+            var user = await _userManager.FindByEmailCustomAsync(HttpContext.User);
+
+            return new UserDto
+            {
+                DisplayName = user.DisplayName,
+                Token = _tokenService.CreateToken(user),
+                Email = user.Email
+            };
+        }
+
+        [HttpGet("emailexists")]
+        public async Task<ActionResult<bool>> CheckEmailExistsAsync([FromQuery] string email)
+        {
+            return await _userManager.FindByEmailAsync(email) != null;
         }
     }
 }
