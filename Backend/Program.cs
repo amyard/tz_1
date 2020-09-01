@@ -8,6 +8,7 @@ using System.Transactions;
 using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +38,13 @@ namespace Backend
                     /* generate data if empty database */
                     await GenerateTransaction(context);
                     await context.SaveChangesAsync();
+
+                    /* create user by default */
+                    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                    var identityContext = services.GetRequiredService<AppIdentityDbContext>();
+
+                    await identityContext.Database.MigrateAsync();
+                    await AppIdentityDbContextSeed.SeedUserAsync(userManager);
                 }
                 catch (Exception ex)
                 {
