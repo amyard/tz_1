@@ -32,6 +32,8 @@ namespace Backend
 
             services.AddDbContext<StoreContext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<AppIdentityDbContext>(x => x.UseSqlite(_config.GetConnectionString("IdentityConnection")));
+
             services.AddSwaggerDocumentation();
 
             services.AddCors(opt => {
