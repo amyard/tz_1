@@ -291,6 +291,122 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "(Validation) Register new user - empty fields",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\":\"\",\r\n    \"email\":\"\",\r\n    \"password\":\"\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/account/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(Validation) Register new user - weak password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\":\"testUser\",\r\n    \"email\":\"testUser@gmail.com\",\r\n    \"password\":\"password\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/account/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(Validation) Register new user - invalid email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\":\"testUser\",\r\n    \"email\":\"testUser\",\r\n    \"password\":\"Admin123*\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/account/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(Validation) Register new user - email in use",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\":\"testUser\",\r\n    \"email\":\"delme@gmail.com\",\r\n    \"password\":\"Admin123*\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/account/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -863,7 +979,7 @@
 	],
 	"variable": [
 		{
-			"id": "b1f8d5c9-f0b9-425b-a852-3cf5c8d9f3e8",
+			"id": "559de1f7-1168-48ed-ba50-207f36ea2283",
 			"key": "url",
 			"value": "https://localhost:5001"
 		}
