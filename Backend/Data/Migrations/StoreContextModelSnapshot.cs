@@ -17,15 +17,15 @@ namespace Backend.Data.Migrations
 
             modelBuilder.Entity("Backend.Models.TransactionMD", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TransactionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ClientName")
+                    b.Property<string>("Amount")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Price")
+                    b.Property<string>("ClientName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -33,14 +33,11 @@ namespace Backend.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("TransactionId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("TransactionId");
 
                     b.ToTable("TransactionMDs");
                 });

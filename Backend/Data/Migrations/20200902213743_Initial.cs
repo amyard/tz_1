@@ -2,7 +2,7 @@
 
 namespace Backend.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,17 +10,16 @@ namespace Backend.Data.Migrations
                 name: "TransactionMDs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    TransactionId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    TransactionId = table.Column<int>(nullable: false),
                     Status = table.Column<string>(nullable: false),
                     Type = table.Column<string>(nullable: false),
                     ClientName = table.Column<string>(nullable: false),
-                    Price = table.Column<string>(nullable: false)
+                    Amount = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TransactionMDs", x => x.Id);
+                    table.PrimaryKey("PK_TransactionMDs", x => x.TransactionId);
                 });
         }
 

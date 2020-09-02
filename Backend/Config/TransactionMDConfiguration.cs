@@ -10,10 +10,9 @@ namespace Backend.Config
     {
         public void Configure(EntityTypeBuilder<TransactionMD> builder)
         {
-            builder.Property(x => x.Id).IsRequired();
             builder.Property(x => x.TransactionId).IsRequired();
             builder.Property(x => x.ClientName).IsRequired();
-            builder.Property(x => x.Price).IsRequired();
+            builder.Property(x => x.Amount).IsRequired();
 
             builder.Property(x => x.Status).IsRequired()
                 .HasConversion(

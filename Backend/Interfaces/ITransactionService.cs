@@ -14,5 +14,8 @@ namespace Backend.Interfaces
         Task<Pagination<TransactionMDDto>> GetTransactionsWithFiltersAsync(TransactionFilterModel filters);
         Task UpdateTransactionAsync(TransactionMD entity, TransactionMDDto transDto);
         Task DeleteTransactionAsync(TransactionMD transactionMD);
+        Task CreateTransactionAsync(TransactionMD transactionMD);
+        Task UpdateTransactionByIdAsync(TransactionMD transactionMD);
+        bool CheckTransactionExists(int transactionId);
     }
 }

@@ -91,9 +91,33 @@ namespace Backend.Services
             entity.Status = GetEnumStatusName(transDto.Status);
             entity.Type = GetEnumTypeName(transDto.Type);
             entity.ClientName = transDto.ClientName;
-            entity.Price = transDto.Price;
+            entity.Amount = transDto.Amount;
 
             await _context.SaveChangesAsync();
+        }
+
+
+        public async Task UpdateTransactionByIdAsync(TransactionMD transactionMD)
+        {
+            TransactionMD entity = await _context.TransactionMDs.FirstOrDefaultAsync(x => x.TransactionId == transactionMD.TransactionId);
+
+            entity.Status = transactionMD.Status;
+            entity.Type = transactionMD.Type;
+            entity.ClientName = transactionMD.ClientName;
+            entity.Amount = transactionMD.Amount;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task CreateTransactionAsync(TransactionMD transactionMD)
+        {
+            await _context.TransactionMDs.AddAsync(transactionMD);
+            await _context.SaveChangesAsync();
+        }
+
+        public bool CheckTransactionExists(int transactionId)
+        {
+            return _context.TransactionMDs.Any(x => x.TransactionId == transactionId);
         }
 
 
@@ -128,7 +152,6 @@ namespace Backend.Services
             else
                 return TransactionStatus.Default;
         }
-
-        # endregion
+        #endregion
     }
 }

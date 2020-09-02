@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
-using Backend.Data;
 using Backend.Dtos;
 using Backend.Errors;
 using Backend.Helpers;
 using Backend.Interfaces;
 using Backend.Models;
 using Backend.RequestModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Backend.Controllers

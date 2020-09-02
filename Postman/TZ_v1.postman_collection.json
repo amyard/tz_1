@@ -953,6 +953,41 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "5. Import/Export",
+			"item": [
+				{
+					"name": "Upload CSV file",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": "/D:/codding/test-case-dotnet-angular/data2.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/csv/import",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"csv",
+								"import"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -979,7 +1014,7 @@
 	],
 	"variable": [
 		{
-			"id": "559de1f7-1168-48ed-ba50-207f36ea2283",
+			"id": "9ab42d2b-f972-48f9-a418-db01f646415a",
 			"key": "url",
 			"value": "https://localhost:5001"
 		}
