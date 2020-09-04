@@ -38,10 +38,9 @@ namespace Backend.Services
             return await _context.TransactionMDs.ToListAsync();
         }
 
-        // TODO - remove extra ToList()
         public async Task<Pagination<TransactionMDDto>> GetTransactionsWithFiltersAsync(TransactionFilterModel filters)
         {
-            var result = await _context.TransactionMDs.ToListAsync();
+            var result = _context.TransactionMDs.AsQueryable();
 
             if(!string.IsNullOrWhiteSpace(filters.Status))
             {
@@ -49,7 +48,7 @@ namespace Backend.Services
 
                 if (status != TransactionStatus.Default)
                 { 
-                    result = result.Where(x => x.Status == status).ToList();
+                    result = result.Where(x => x.Status == status);
                 }
             }
 
@@ -59,7 +58,7 @@ namespace Backend.Services
 
                 if (types != TransactionType.Default)
                 {
-                    result = result.Where(x => x.Type == types).ToList();
+                    result = result.Where(x => x.Type == types);
                 }
             }
 
@@ -71,12 +70,12 @@ namespace Backend.Services
             
             if(filters.Page == 0) filters.Page = 1;
 
-            result = result.Skip((filters.Page - 1) * pageSize).Take(pageSize).ToList();
-            var data = _mapper.Map<IReadOnlyList<TransactionMD>, IReadOnlyList<TransactionMDDto>>(result);
+            var result2 = await result.Skip((filters.Page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var data = _mapper.Map<IReadOnlyList<TransactionMD>, IReadOnlyList<TransactionMDDto>>(result2);
             bool previousPage = filters.Page-1 != 0 ? true : false;
             bool nextPage = filters.Page+1 > pagesLast ? false : true;
 
-            return new Pagination<TransactionMDDto>(filters.Page, pagesLast, pageSize, totalItems, result.Count(), previousPage, nextPage, data);
+            return new Pagination<TransactionMDDto>(filters.Page, pagesLast, pageSize, totalItems, result2.Count(), previousPage, nextPage, data);
         }
 
         public async Task DeleteTransactionAsync(TransactionMD transactionMD)

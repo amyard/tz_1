@@ -8,7 +8,7 @@ using Backend.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Backend.Services
+namespace Backend.Repository
 {
     public class TokenService : ITokenService
     {
