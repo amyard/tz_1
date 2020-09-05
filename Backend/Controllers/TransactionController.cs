@@ -38,6 +38,10 @@ namespace Backend.Controllers
             return _mapper.Map<TransactionMD, TransactionMDDto>(trans);
         }
 
+        /// <summary>
+        /// Deletes a specific Transaction.
+        /// </summary>
+        /// <param name="transactionId"></param> 
         [HttpDelete("{transactionId}")]
         public async Task<ActionResult> DeleteTransactionAsync(int transactionId)
         {
