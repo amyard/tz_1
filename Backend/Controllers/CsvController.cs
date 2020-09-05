@@ -13,6 +13,7 @@ using CsvHelper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 
 namespace Backend.Controllers
 {
@@ -90,6 +91,61 @@ namespace Backend.Controllers
 
             return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", $"Transaction_{DateTime.Now.ToString("MM/dd/yyyy_HH:mm")}.csv");
         }
+
+
+        [HttpGet("download-excel")]
+        public async Task<ActionResult> ImportToExcel([FromQuery] TransactionFilterDownloadModel filters)
+        {
+            var listOfData = await _trans.GetTransactionsWithFiltersDonwloadAsync(filters);
+
+            // save to excel file
+
+            // If you use EPPlus in a noncommercial context
+            // according to the Polyform Noncommercial license:
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            var dateNow = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
+
+            ExcelPackage pck = new ExcelPackage();
+            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Reprt");
+
+            ws.Cells["A1"].Value = "Report";
+            ws.Cells["B1"].Value = "Transaction Report";
+
+            ws.Cells["A2"].Value = "Date";
+            ws.Cells["B2"].Value = dateNow;
+
+            ws.Cells["A2"].Value = "Amount of Data";
+            ws.Cells["B2"].Value = listOfData.Count;
+
+
+            ws.Cells["A6"].Value = "TransactionId";
+            ws.Cells["B6"].Value = "Status";
+            ws.Cells["C6"].Value = "Type";
+            ws.Cells["D6"].Value = "ClientName";
+            ws.Cells["E6"].Value = "Amount";
+
+            int rowStart = 7;
+            foreach(TransactionMDDto item in listOfData)
+            {
+                ws.Cells[string.Format("A{0}", rowStart)].Value = item.TransactionId;
+                ws.Cells[string.Format("B{0}", rowStart)].Value = item.Status;
+                ws.Cells[string.Format("C{0}", rowStart)].Value = item.Type;
+                ws.Cells[string.Format("D{0}", rowStart)].Value = item.ClientName;
+                ws.Cells[string.Format("E{0}", rowStart)].Value = item.Amount;
+
+                rowStart++;
+            }
+
+            ws.Cells["A:AZ"].AutoFitColumns();
+
+            return File(
+                    pck.GetAsByteArray(),
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    $"Transaction_{dateNow}.xlsx"
+                );
+        }
+
 
         #region private methods
         private string GetHeaderColumnNames()
