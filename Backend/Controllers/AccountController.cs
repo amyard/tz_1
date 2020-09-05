@@ -25,6 +25,13 @@ namespace Backend.Controllers
             _tokenService = tokenService;
         }
 
+        /// <summary>
+        /// Log In.
+        /// </summary>
+        /// <param name="loginDto"></param> 
+        /// <returns>Return users info: email, name and authentication token.</returns>
+        /// <response code="200">Login as user</response>
+        /// <response code="401">Such user does not exists</response>
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
@@ -44,6 +51,13 @@ namespace Backend.Controllers
             };
         }
 
+        /// <summary>
+        /// Sign In.
+        /// </summary>
+        /// <param name="registerDto"></param> 
+        /// <returns>Return users info: email, name and authentication token.</returns>
+        /// <response code="200">Register new user</response>
+        /// <response code="400">Bad request. Wrong password, empty fields and etc.</response>
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
@@ -86,6 +100,13 @@ namespace Backend.Controllers
             };
         }
 
+
+        /// <summary>
+        /// Check if email in use.
+        /// </summary>
+        /// <param name="email"></param> 
+        /// <returns>Return ture/false depends on existing such email in our db</returns>
+        /// <response code="200">true or false</response>
         [HttpGet("emailexists")]
         public async Task<ActionResult<bool>> CheckEmailExistsAsync([FromQuery] string email)
         {

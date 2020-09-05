@@ -22,12 +22,24 @@ namespace Backend.Controllers
             _transactionService = transactionService;
         }
 
+        /// <summary>
+        /// Get the list of transactions with pagination information.
+        /// </summary>
+        /// <param name="transFilter"></param> 
+        /// <returns>Return a list of transactions with pagination information</returns>
         [HttpGet]
         public async Task<ActionResult<Pagination<TransactionMDDto>>> GetAllTransactions([FromQuery] TransactionFilterModel transFilter)
         {
             return Ok(await _transactionService.GetTransactionsWithFiltersAsync(transFilter));
         }
 
+        /// <summary>
+        /// Get a specific Transaction.
+        /// </summary>
+        /// <param name="transactionId"></param> 
+        /// <returns>Return a Transaction with data</returns>
+        /// <response code="200">Return a Transaction with data</response>
+        /// <response code="404">Resource was not found</response>
         [HttpGet("{transactionId}")]
         public async Task<ActionResult<TransactionMDDto>> GetTransaction(int transactionId)
         {
@@ -41,7 +53,10 @@ namespace Backend.Controllers
         /// <summary>
         /// Deletes a specific Transaction.
         /// </summary>
-        /// <param name="transactionId"></param> 
+        /// <param name="transactionId"></param>
+        /// <returns>A success or error message with StatusCode</returns> 
+        /// <response code="200">Success.Transaction was deleted</response>
+        /// <response code="404">Resource was not found</response>
         [HttpDelete("{transactionId}")]
         public async Task<ActionResult> DeleteTransactionAsync(int transactionId)
         {
@@ -54,6 +69,13 @@ namespace Backend.Controllers
             return Ok(new ApiResponse(200, "Resource deleted successfully"));
         }
 
+        /// <summary>
+        /// Update a specific Transaction.
+        /// </summary>
+        /// <param name="transDto"></param> 
+        /// <returns>A success or error message with StatusCode</returns>
+        /// <response code="200">Resource updated successfully</response>
+        /// <response code="404">Resource was not found</response>
         [HttpPut("{transactionId}")]
         public async Task<ActionResult> UpdateTransactionAsync([FromForm] TransactionMDDto transDto)
         {

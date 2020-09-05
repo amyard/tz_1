@@ -28,7 +28,12 @@ namespace Backend.Controllers
             _trans = trans;
         }
 
-
+        /// <summary>
+        /// Import data from CVS file.
+        /// </summary>
+        /// <param name="uploadFile"></param> 
+        /// <returns>Return Status code 200</returns>
+        /// <response code="200">Data were loaded in DB</response>
         [HttpPost("import")]
         public async Task<ActionResult> ImportCsvFile(IFormFile uploadFile)
         {
@@ -74,7 +79,10 @@ namespace Backend.Controllers
             return Ok();
         }
 
-
+        /// <summary>
+        /// Save data in csv file.
+        /// </summary>
+        /// <param name="filters"></param> 
         [HttpGet("download-csv")]
         public async Task<ActionResult> ImportToCsv([FromBody] TransactionFilterDownloadModel filters)
         {
@@ -93,6 +101,10 @@ namespace Backend.Controllers
         }
 
 
+        /// <summary>
+        /// Save data in excel file - xlsx.
+        /// </summary>
+        /// <param name="filters"></param> 
         [HttpGet("download-excel")]
         public async Task<ActionResult> ImportToExcel([FromBody] TransactionFilterDownloadModel filters)
         {
