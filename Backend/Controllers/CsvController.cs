@@ -94,14 +94,10 @@ namespace Backend.Controllers
 
 
         [HttpGet("download-excel")]
-        public async Task<ActionResult> ImportToExcel([FromQuery] TransactionFilterDownloadModel filters)
+        public async Task<ActionResult> ImportToExcel([FromBody] TransactionFilterDownloadModel filters)
         {
             var listOfData = await _trans.GetTransactionsWithFiltersDonwloadAsync(filters);
 
-            // save to excel file
-
-            // If you use EPPlus in a noncommercial context
-            // according to the Polyform Noncommercial license:
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             var dateNow = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
@@ -115,8 +111,8 @@ namespace Backend.Controllers
             ws.Cells["A2"].Value = "Date";
             ws.Cells["B2"].Value = dateNow;
 
-            ws.Cells["A2"].Value = "Amount of Data";
-            ws.Cells["B2"].Value = listOfData.Count;
+            ws.Cells["A3"].Value = "Amount of Data";
+            ws.Cells["B3"].Value = listOfData.Count;
 
 
             ws.Cells["A6"].Value = "TransactionId";
