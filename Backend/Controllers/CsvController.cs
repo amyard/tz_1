@@ -1,9 +1,14 @@
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Backend.Dtos;
 using Backend.Interfaces;
 using Backend.Models;
+using Backend.RequestModels;
 using CsvHelper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -56,7 +61,6 @@ namespace Backend.Controllers
                     {
                         // check if transaction exists
                         if (_trans.CheckTransactionExists(item.TransactionId))
-                            // update
                             await _trans.UpdateTransactionByIdAsync(item);
                         else
                             await _trans.CreateTransactionAsync(item);
@@ -68,5 +72,30 @@ namespace Backend.Controllers
 
             return Ok();
         }
+
+
+        [HttpGet("download-csv")]
+        public async Task<ActionResult> ImportToCsv([FromBody] TransactionFilterDownloadModel filters)
+        {
+            var listOfData = await _trans.GetTransactionsWithFiltersDonwloadAsync(filters);
+            string headerColumnNames = GetHeaderColumnNames();
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine(headerColumnNames);
+
+            foreach(TransactionMDDto item in listOfData)
+            {
+                builder.AppendLine($"{item.TransactionId},{item.Status},{item.Type},{item.ClientName},{item.Amount}");
+            }
+
+            return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", $"Transaction_{DateTime.Now.ToString("MM/dd/yyyy_HH:mm")}.csv");
+        }
+
+        #region private methods
+        private string GetHeaderColumnNames()
+        {
+            return string.Join(",", typeof(TransactionMD).GetProperties().Select(f => f.Name).ToList());
+        }
+        #endregion
     }
 }

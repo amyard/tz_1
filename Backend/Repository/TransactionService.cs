@@ -70,12 +70,41 @@ namespace Backend.Services
             
             if(filters.Page == 0) filters.Page = 1;
 
-            var result2 = await result.Skip((filters.Page - 1) * pageSize).Take(pageSize).ToListAsync();
-            var data = _mapper.Map<IReadOnlyList<TransactionMD>, IReadOnlyList<TransactionMDDto>>(result2);
+            var listOfData = await result.Skip((filters.Page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var data = _mapper.Map<IReadOnlyList<TransactionMD>, IReadOnlyList<TransactionMDDto>>(listOfData);
             bool previousPage = filters.Page-1 != 0 ? true : false;
             bool nextPage = filters.Page+1 > pagesLast ? false : true;
 
-            return new Pagination<TransactionMDDto>(filters.Page, pagesLast, pageSize, totalItems, result2.Count(), previousPage, nextPage, data);
+            return new Pagination<TransactionMDDto>(filters.Page, pagesLast, pageSize, totalItems, listOfData.Count(), previousPage, nextPage, data);
+        }
+
+
+        public async Task<IReadOnlyList<TransactionMDDto>> GetTransactionsWithFiltersDonwloadAsync(TransactionFilterDownloadModel filters)
+        {
+            var result = _context.TransactionMDs.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filters.Status))
+            {
+                TransactionStatus status = GetEnumStatusName(filters.Status);
+
+                if (status != TransactionStatus.Default)
+                {
+                    result = result.Where(x => x.Status == status);
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(filters.Type))
+            {
+                TransactionType types = GetEnumTypeName(filters.Type);
+
+                if (types != TransactionType.Default)
+                {
+                    result = result.Where(x => x.Type == types);
+                }
+            }
+
+            var listOfData = await result.ToListAsync();
+            return _mapper.Map<IReadOnlyList<TransactionMD>, IReadOnlyList<TransactionMDDto>>(listOfData);
         }
 
         public async Task DeleteTransactionAsync(TransactionMD transactionMD)
@@ -151,6 +180,7 @@ namespace Backend.Services
             else
                 return TransactionStatus.Default;
         }
+
         #endregion
     }
 }

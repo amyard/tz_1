@@ -770,7 +770,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/transaction?page=11",
+							"raw": "{{url}}/api/transaction?page=11111",
 							"host": [
 								"{{url}}"
 							],
@@ -781,7 +781,7 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "11"
+									"value": "11111"
 								}
 							]
 						}
@@ -985,6 +985,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Download to csv file",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"pending\",\r\n    \"type\":\"refill\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/csv/download-csv",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"csv",
+								"download-csv"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1014,7 +1049,7 @@
 	],
 	"variable": [
 		{
-			"id": "9ab42d2b-f972-48f9-a418-db01f646415a",
+			"id": "9da0ef8a-ae9f-4d2d-82f2-596a933778de",
 			"key": "url",
 			"value": "https://localhost:5001"
 		}
