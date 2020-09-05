@@ -42,7 +42,7 @@ namespace Backend.Extensions
                     Reference = new OpenApiReference
                     {
                         Type = ReferenceType.SecurityScheme,
-                        Id = "Beared"
+                        Id = "Bearer"
                     }
                 };
 

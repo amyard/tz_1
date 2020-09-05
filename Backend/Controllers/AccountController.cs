@@ -86,6 +86,10 @@ namespace Backend.Controllers
             };
         }
 
+        /// <summary>
+        /// Display info for current user depends on token.
+        /// </summary>
+        /// <returns>Return users info: email, name and authentication token.</returns>
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrectUser()
