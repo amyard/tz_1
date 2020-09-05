@@ -929,19 +929,17 @@
 									"type": "text"
 								},
 								{
-									"key": "Price",
+									"key": "Amount",
 									"value": "$28.43",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "https://localhost:44333/api/transaction/1112",
-							"protocol": "https",
+							"raw": "{{url}}/api/transaction/1112",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "44333",
 							"path": [
 								"api",
 								"transaction",
@@ -968,7 +966,7 @@
 								{
 									"key": "",
 									"type": "file",
-									"src": "/D:/codding/test-case-dotnet-angular/data2.csv"
+									"src": "/D:/codding/test-case-dotnet-angular/data.csv"
 								}
 							]
 						},
@@ -1020,6 +1018,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Upload CSV file - send no file",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/csv/import",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"csv",
+								"import"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1049,7 +1077,7 @@
 	],
 	"variable": [
 		{
-			"id": "9da0ef8a-ae9f-4d2d-82f2-596a933778de",
+			"id": "d2bca6e2-0956-49d6-a5f8-1eda98a0c6be",
 			"key": "url",
 			"value": "https://localhost:5001"
 		}

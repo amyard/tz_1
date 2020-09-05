@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Backend.Dtos;
+using Backend.Errors;
 using Backend.Interfaces;
 using Backend.Models;
 using Backend.RequestModels;
@@ -34,10 +35,20 @@ namespace Backend.Controllers
         /// <param name="uploadFile"></param> 
         /// <returns>Return Status code 200</returns>
         /// <response code="200">Data were loaded in DB</response>
+        /// <response code="404">There were any files in response</response>
         [HttpPost("import")]
         public async Task<ActionResult> ImportCsvFile(IFormFile uploadFile)
         {
-            IFormFile file = Request.Form.Files[0];
+            IFormFile file;
+
+            try
+            {
+                file = Request.Form.Files[0];
+            }
+            catch(Exception ex)
+            {
+                return NotFound(new ApiResponse(404, "There were any files in response"));
+            }
 
             string folderName = "files";
             string webRootPath = _env.WebRootPath;
