@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Backend.Data
 {
